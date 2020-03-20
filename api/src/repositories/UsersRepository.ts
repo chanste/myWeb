@@ -1,9 +1,15 @@
-import { EntityRepository, Repository, Not } from "typeorm";
+import {
+  EntityRepository,
+  Repository,
+  Not,
+  getCustomRepository
+} from "typeorm";
+
 import { Users } from "../entity/Users";
 
 @EntityRepository(Users)
 export class UsersRepository extends Repository<Users> {
-  findByUserName(userName: string) {
-    return this.findOne({ userName });
+  findByUserName(username: string) {
+    return this.findOne({ username });
   }
 }
