@@ -6,9 +6,6 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./qna.component.scss"]
 })
 export class QnaComponent implements OnInit {
-  columnList = [];
-  dataList = [];
-
   constructor() {}
 
   ngOnInit(): void {}

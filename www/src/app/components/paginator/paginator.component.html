@@ -1,0 +1,17 @@
+<div class="wrap paginator-wrap">
+  <span
+    class="paginator button paginator-previous"
+    *ngIf="isFirst"
+    style="opacity: 0.3;"
+    ><</span
+  >
+  <span class="paginator button paginator-previous" *ngIf="!isFirst"><</span>
+
+  <span
+    class="paginator button paginator-next"
+    *ngIf="isLast"
+    style="opacity: 0.3;"
+    >></span
+  >
+  <span class="paginator button paginator-next" *ngIf="!isLast">></span>
+</div>

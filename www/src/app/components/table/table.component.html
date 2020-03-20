@@ -1,0 +1,51 @@
+<div class="wrap table-wrap">
+  <div class="loading" *ngIf="!isLoaded">로딩중...</div>
+  <div class="table-form-wrap" *ngIf="isLoaded!">
+    <button class="button write-button">글쓰기</button>
+    <table mat-table [dataSource]="dataSource" class="table-form">
+      <ng-container matColumnDef="no">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element">
+          <span>{{ element.no }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef>작성자</th>
+        <td mat-cell *matCellDef="let element">{{ element.author }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>제목</th>
+        <td mat-cell *matCellDef="let element">
+          <span (click)="routeToContent()" style="cursor: pointer;">{{
+            element.title
+          }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>등록일</th>
+        <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <!--table footer-->
+    <div class="footer table-footer">
+      <!--search form-->
+      <div class="footer footer-left">
+        <app-search-form
+          [searchCategory]="searchCategory"
+          (submit)="search()"
+        ></app-search-form>
+      </div>
+
+      <div class="footer footer-right">
+        <app-paginator [curPage]="curPage" [maxPage]="maxPage"></app-paginator>
+      </div>
+    </div>
+  </div>
+</div>

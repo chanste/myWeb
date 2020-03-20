@@ -1,0 +1,14 @@
+<div class="wrap search-wrap search">
+  <select
+    class="search-select search"
+    [(ngModel)]="searchCategory"
+    (change)="submit.emit()"
+  >
+    <option [value]="''">전체</option>
+    <option [value]="'author'">작성자</option>
+    <option [value]="'title'">제목</option>
+  </select>
+
+  <input type="text" class="search search-input" placeholder="검색어" />
+  <button class="search search-button" (click)="submit.emit()">검색</button>
+</div>

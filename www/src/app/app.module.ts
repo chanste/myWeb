@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 
 //texteditor
 import { HttpClientModule } from "@angular/common/http";
@@ -15,12 +16,14 @@ import { AboutMeComponent } from "./pages/about-me/about-me.component";
 import { QnaComponent } from "./pages/qna/qna.component";
 import { SignInComponent } from "./pages/sign-in/sign-in.component";
 import { NavBarComponent } from "./layouts/nav-bar/nav-bar.component";
-import { NoticeBoardComponent } from "./components/notice-board/notice-board.component";
 import { QnaContentComponent } from "./pages/qna/qna-content/qna-content.component";
 import { QnaWriteComponent } from "./pages/qna/qna-write/qna-write.component";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { SignInFormComponent } from './components/sign-in-form/sign-in-form.component';
+import { SignInFormComponent } from "./components/sign-in-form/sign-in-form.component";
+import { TableComponent } from "./components/table/table.component";
+import { SearchFormComponent } from "./components/search-form/search-form.component";
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 @NgModule({
   declarations: [
@@ -29,10 +32,12 @@ import { SignInFormComponent } from './components/sign-in-form/sign-in-form.comp
     QnaComponent,
     SignInComponent,
     NavBarComponent,
-    NoticeBoardComponent,
     QnaContentComponent,
     QnaWriteComponent,
-    SignInFormComponent
+    SignInFormComponent,
+    TableComponent,
+    SearchFormComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,8 @@ import { SignInFormComponent } from './components/sign-in-form/sign-in-form.comp
     HttpClientModule,
     AngularEditorModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
