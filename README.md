@@ -1,4 +1,4 @@
-# Www
+# WWW
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.5 by `Lee, HyunGu`
 
@@ -25,3 +25,9 @@ Only few authorized people can use or customize this private project.
 Using this project without any permission from developer `Lee, HyunGu` can raise some problems.
 
 Do not modify this README.
+
+# API
+
+Will be added in the near future.
+
+This project is created by `Lee, HyunGu`
