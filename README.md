@@ -21,8 +21,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Detail & Warning
 
 This private project was built as personal webpage.
-Only few authorized people can use or customize this private project.
-Using this project without any permission from developer `Lee, HyunGu` can raise some problems.
+Only few people with permission from `Lee, HyunGu` can use or customize this private project.
 
 Do not modify this README.
 
