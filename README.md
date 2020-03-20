@@ -21,8 +21,7 @@ Run `ng e2e` in the directory `./www` to execute the end-to-end tests via [Protr
 ### Detail & Warning
 
 This project was built as personal webpage.
-Please visit my web below and ask me before you use this project.
-[link](http://www.nothing-yet.com)
+Please visit [my web](http://www.nothing-yet.com) and ask me before you use this project.
 
 Do not modify this README without any permission from `Lee, HyunGu`
 
