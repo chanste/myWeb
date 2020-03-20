@@ -1,0 +1,17 @@
+<div class="nav-bar">
+  <div class="button-wrap">
+    <a [routerLink]="['/main/about-me']" class="button button-border"
+      >About Me</a
+    >
+    <a [routerLink]="['/main/qna']" class="button button-border">Q&A</a>
+    <a
+      *ngIf="!isSignedIn"
+      [routerLink]="['/sign-in']"
+      class="button button-signIn"
+    >
+      Sign In
+    </a>
+    <div class="user-info" *ngIf="isSignedIn">{{ userName }}</div>
+  </div>
+</div>
+<router-outlet></router-outlet>
