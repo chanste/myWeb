@@ -7,19 +7,19 @@ import { RequestHandler } from "express";
 
 //typeorm entities and repositories
 import { getCustomRepository } from "typeorm";
-import { Users } from "../src/entity/Users";
-import { UsersRepository } from "./repositories/UsersRepository";
+import { User } from "./entity/User";
+import { UserRepository } from "./repository/UserRepository";
+import { UserTokenRepository } from "./repository/UserTokenRepository";
 
 //JWT CONFIG
 const SECRET = "PUT_YOUR_RANDOM_SECRET_STRING_HERE";
 const TOKEN_EXPIRE = "99y";
 
 //define user req func
-export const reqUser = (user: Users) => {
+export const reqUser = (user: User): Express.User => {
   return {
     id: user.id,
-    username: user.username,
-    password: user.password
+    username: user.username
   };
 };
 
@@ -31,8 +31,8 @@ passport.use(
     session: false
   }),
   async (username, password, done) => {
-    const usersRepository = getCustomRepository(UsersRepository);
-    const user = await usersRepository.findByUserName(username);
+    const userRepository = getCustomRepository(UserRepository);
+    const user = await userRepository.findByUserName(username);
 
     //no Username
     if (!user) return done(null, false);
@@ -84,12 +84,24 @@ const serialize: RequestHandler = (req, res, next) => {
   next();
 };
 
-export const generateAccessToken = user => {
+export const generateAccessToken = (user: Express.User) => {
   return jwt.sign(user, SECRET, { expiresIn: TOKEN_EXPIRE });
 };
 
 const generateTokens: RequestHandler = async (req, res, next) => {
-  const user = getCustomRepository(UsersRepository);
+  const userRepository = getCustomRepository(UserRepository);
+  const userTokenRepository = getCustomRepository(UserTokenRepository);
+
+  const user = await userRepository.findByUserName(req.user.username);
+  const userToken = await userTokenRepository.createAndSave(user);
+
+  req.user.rid = userToken.id;
+  const accessToken = generateAccessToken(req.user);
+
+  req.token = {
+    accessToken,
+    refreshToken: userToken.refreshtoken
+  };
 };
 
 export const authenticates: RequestHandler[] = [
@@ -97,3 +109,19 @@ export const authenticates: RequestHandler[] = [
   serialize,
   generateTokens
 ];
+
+//check whether token is expired and valid
+export const isAuthorized = passport.authenticate("bearer", { session: false });
+
+//check whether token is valid
+export const checkOnlyValidToken: RequestHandler = (req, res, next) => {
+  if (
+    req.headers.authorization ||
+    req.headers.authorization.split(" ")[0] !== "Bearer"
+  )
+    return next("PUT_YOUR_INVALID_TOKEN_ERROR");
+
+  const token = req.headers.authorization.split(" ")[1];
+  req.user = jwt.decode(token) as Express.User;
+  next();
+};
