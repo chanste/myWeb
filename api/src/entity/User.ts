@@ -1,15 +1,23 @@
-import { Entity, Column, Index, BeforeInsert } from "typeorm";
+import { Entity, Column, Index, BeforeInsert, OneToMany } from "typeorm";
 import { Common } from "./Common";
 import bcrypt from "bcrypt";
+import { UserToken } from "./UserToken";
 
 @Entity()
-export class Users extends Common {
+export class User extends Common {
   @Index({ unique: true })
   @Column("varchar", { length: 20, comment: "ID" })
   username: string;
 
   @Column("varchar", { comment: "Password" })
   password: string;
+
+  //relations====================================
+  @OneToMany(
+    type => UserToken,
+    userToken => userToken.user
+  )
+  userTokens: UserToken[];
 
   //hash password before insert
   @BeforeInsert()
@@ -22,6 +30,6 @@ export class Users extends Common {
   }
 
   async saveEncryptedPassword() {
-    this.password = await Users.encryptPassword(this.password);
+    this.password = await User.encryptPassword(this.password);
   }
 }
