@@ -113,7 +113,7 @@ export const authenticates: RequestHandler[] = [
 //check whether token is expired and valid
 export const isAuthorized = passport.authenticate("bearer", { session: false });
 
-//check whether token is valid
+//check only whether token is valid for refreshing of token
 export const checkOnlyValidToken: RequestHandler = (req, res, next) => {
   if (
     req.headers.authorization ||
