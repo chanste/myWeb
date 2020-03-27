@@ -15,7 +15,8 @@ export class User extends Common {
   //relations====================================
   @OneToMany(
     type => UserToken,
-    userToken => userToken.user
+    userToken => userToken.user,
+    { cascade: true }
   )
   userTokens: UserToken[];
 

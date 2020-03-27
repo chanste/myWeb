@@ -10,7 +10,8 @@ export class UserToken extends Common {
   //relation=========================
   @ManyToOne(
     type => User,
-    user => user.id
+    user => user.id,
+    { onDelete: "CASCADE" }
   )
   user: User;
 }
