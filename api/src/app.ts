@@ -10,6 +10,9 @@ import { createConnection, Connection } from "typeorm";
 //environment
 import * as dotenv from "dotenv";
 
+//router
+import testRouter from "./router/test";
+
 //connec to eitity
 createConnection()
   .then(async (connection: Connection) =>
@@ -41,6 +44,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 
 //routes
+app.use("/test", testRouter);
 
 //error handling middleware
 const errorRequestHandler: ErrorRequestHandler = (err, req, res, next) => {
